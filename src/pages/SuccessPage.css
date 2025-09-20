@@ -1,0 +1,13 @@
+/* SUCCESS PAGE STYLES */
+.success-page {
+  background-color: #FAF7F2;
+  min-height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.success-page h1 {
+  color: #CE2829;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}

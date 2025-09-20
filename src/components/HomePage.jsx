@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../pages/HomePage.css';
 
 function HomePage() {
   const history = useHistory();

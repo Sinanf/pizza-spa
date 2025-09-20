@@ -1,0 +1,320 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import '../pages/OrderPage.css';
+
+function OrderPage({ setOrderData }) {
+  const history = useHistory();
+  
+  // Form State
+  const [formData, setFormData] = useState({
+    isim: '',
+    boyut: '',
+    hamur: '',
+    malzemeler: [],
+    ozelNotlar: '',
+    adet: 1
+  });
+  
+  // Error State
+  const [errors, setErrors] = useState({});
+  
+  // Malzeme listesi (tasarımdan)
+  const malzemeler = [
+    'Pepperoni', 'Domates', 'Biber', 'Sosis', 'Mısır', 'Sucuk', 
+    'Kanadali Jambon', 'Tavuk Izgara', 'Soğan', 'Ananas', 
+    'Jalapeno', 'Kabak', 'Sarımsak'
+  ];
+
+  // Input değişiklik handler
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    validateField(name, value);
+  };
+
+  // Malzeme checkbox handler
+  const handleMalzemeChange = (malzeme) => {
+    setFormData(prev => {
+      const yeniMalzemeler = prev.malzemeler.includes(malzeme)
+        ? prev.malzemeler.filter(m => m !== malzeme)
+        : [...prev.malzemeler, malzeme];
+      
+      if (yeniMalzemeler.length <= 10) {
+        validateField('malzemeler', yeniMalzemeler);
+        return { ...prev, malzemeler: yeniMalzemeler };
+      }
+      return prev;
+    });
+  };
+
+  // Adet değiştirme
+  const handleAdetChange = (delta) => {
+    setFormData(prev => ({
+      ...prev,
+      adet: Math.max(1, prev.adet + delta)
+    }));
+  };
+
+  // Field validation
+  const validateField = (name, value) => {
+    const newErrors = { ...errors };
+    
+    switch(name) {
+      case 'isim':
+        if (value.length < 3) {
+          newErrors.isim = 'İsim en az 3 karakter olmalıdır';
+        } else {
+          delete newErrors.isim;
+        }
+        break;
+      case 'boyut':
+        if (!value) {
+          newErrors.boyut = 'Pizza boyutu seçiniz';
+        } else {
+          delete newErrors.boyut;
+        }
+        break;
+      case 'malzemeler':
+        if (value.length < 4) {
+          newErrors.malzemeler = 'En az 4 malzeme seçiniz';
+        } else if (value.length > 10) {
+          newErrors.malzemeler = 'En fazla 10 malzeme seçebilirsiniz';
+        } else {
+          delete newErrors.malzemeler;
+        }
+        break;
+    }
+    
+    setErrors(newErrors);
+  };
+
+  // Form geçerliliği kontrolü
+  const isFormValid = () => {
+    return formData.isim.length >= 3 && 
+           formData.boyut && 
+           formData.malzemeler.length >= 4 && 
+           formData.malzemeler.length <= 10 &&
+           Object.keys(errors).length === 0;
+  };
+
+  // Fiyat hesaplama
+  const calculatePrice = () => {
+    const basePrice = 85.50;
+    const extraIngredientPrice = formData.malzemeler.length * 5;
+    return (basePrice + extraIngredientPrice) * formData.adet;
+  };
+
+  // Form submit
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!isFormValid()) return;
+  
+  try {
+    const orderData = {
+      ...formData,
+      totalPrice: calculatePrice(),
+      timestamp: new Date().toISOString()
+    };
+    
+    // IT1 için mock response oluştur
+    const mockResponse = {
+      data: {
+        id: Math.floor(Math.random() * 1000),
+        createdAt: new Date().toISOString(),
+        ...orderData
+      }
+    };
+    
+    // Console'a yazdır (IT1 gereksinimi)
+    console.log('Sipariş Yanıtı:', mockResponse.data);
+    console.log('Form Verileri:', orderData);
+    
+    // State lifting ile veriyi üst componente gönder
+    setOrderData(mockResponse.data);
+    
+    // Başarı sayfasına yönlendir
+    history.push('/onay');
+    
+  } catch (error) {
+    console.error('Sipariş hatası:', error);
+  }
+};
+
+  return (
+    <div className="order-page">
+      {/* Header */}
+      <header className="order-header">
+        <img src="/images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
+        <nav className="breadcrumb">
+          Anasayfa - Seçenekler - <strong>Sipariş Oluştur</strong>
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <main className="order-main">
+        {/* Pizza Info */}
+        <section className="pizza-info">
+          <h2>Position Absolute Acı Pizza</h2>
+          <div className="pizza-details">
+            <span className="price">85.50₺</span>
+            <div className="rating">
+              <div className="stars">
+                ★★★★★
+              </div>
+              <span>4.9</span>
+              <span>(200)</span>
+            </div>
+          </div>
+          <p className="pizza-description">
+            Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. 
+            Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha 
+            sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, 
+            genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan 
+            kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
+          </p>
+        </section>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="pizza-form">
+          <div className="form-row">
+            {/* Boyut Seçimi */}
+            <div className="form-group">
+              <label>Boyut Seç *</label>
+              <div className="radio-group">
+                {['Küçük', 'Orta', 'Büyük'].map(boyut => (
+                  <label key={boyut} className="radio-label">
+                    <input
+                      type="radio"
+                      name="boyut"
+                      value={boyut}
+                      checked={formData.boyut === boyut}
+                      onChange={handleInputChange}
+                    />
+                    <span className="radio-custom"></span>
+                    {boyut}
+                  </label>
+                ))}
+              </div>
+              {errors.boyut && <span className="error">{errors.boyut}</span>}
+            </div>
+
+            {/* Hamur Seçimi */}
+            <div className="form-group">
+              <label htmlFor="hamur">Hamur Seç *</label>
+              <select
+                id="hamur"
+                name="hamur"
+                value={formData.hamur}
+                onChange={handleInputChange}
+                className="hamur-select"
+              >
+                <option value="">Hamur Kalınlığı</option>
+                <option value="ince">İnce</option>
+                <option value="normal">Normal</option>
+                <option value="kalin">Kalın</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Malzemeler */}
+          <div className="form-group">
+            <label>Ek Malzemeler</label>
+            <p className="malzeme-info">En fazla 10 malzeme seçebilirsiniz. 5₺</p>
+            <div className="checkbox-grid">
+              {malzemeler.map(malzeme => (
+                <label key={malzeme} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={formData.malzemeler.includes(malzeme)}
+                    onChange={() => handleMalzemeChange(malzeme)}
+                  />
+                  <span className="checkbox-custom"></span>
+                  {malzeme}
+                </label>
+              ))}
+            </div>
+            {errors.malzemeler && <span className="error">{errors.malzemeler}</span>}
+          </div>
+
+          {/* İsim */}
+          <div className="form-group">
+            <label htmlFor="isim">İsim Soyisim</label>
+            <input
+              type="text"
+              id="isim"
+              name="isim"
+              value={formData.isim}
+              onChange={handleInputChange}
+              placeholder="İsminizi giriniz"
+              className="name-input"
+            />
+            {errors.isim && <span className="error">{errors.isim}</span>}
+          </div>
+
+          {/* Notlar */}
+          <div className="form-group">
+            <label htmlFor="ozelNotlar">Sipariş Notu</label>
+            <textarea
+              id="ozelNotlar"
+              name="ozelNotlar"
+              value={formData.ozelNotlar}
+              onChange={handleInputChange}
+              placeholder="Siparişinize eklemek istediğiniz bir not var mı?"
+              className="order-note"
+              rows="3"
+            />
+          </div>
+
+          {/* Alt Kısım - Adet ve Toplam */}
+          <div className="order-bottom">
+            <div className="quantity-section">
+              <button 
+                type="button" 
+                className="qty-btn"
+                onClick={() => handleAdetChange(-1)}
+              >
+                -
+              </button>
+              <span className="quantity">{formData.adet}</span>
+              <button 
+                type="button" 
+                className="qty-btn"
+                onClick={() => handleAdetChange(1)}
+              >
+                +
+              </button>
+            </div>
+
+            <div className="order-summary">
+              <h3>Sipariş Toplamı</h3>
+              <div className="summary-line">
+                <span>Seçimler</span>
+                <span>{(formData.malzemeler.length * 5).toFixed(2)}₺</span>
+              </div>
+              <div className="summary-line total">
+                <span>Toplam</span>
+                <span>{calculatePrice().toFixed(2)}₺</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button 
+            type="submit" 
+            className={`submit-btn ${!isFormValid() ? 'disabled' : ''}`}
+            disabled={!isFormValid()}
+          >
+            SİPARİŞ VER
+          </button>
+        </form>
+      </main>
+    </div>
+  );
+}
+
+export default OrderPage;

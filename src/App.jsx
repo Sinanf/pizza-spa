@@ -1,9 +1,9 @@
 // src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import OrderPage from './pages/OrderPage';
-import SuccessPage from './pages/SuccessPage';
+import HomePage from './components/HomePage';
+import OrderPage from './components/OrderPage';
+import SuccessPage from './components/SuccessPage';
 import './App.css';
 
 function App() {
