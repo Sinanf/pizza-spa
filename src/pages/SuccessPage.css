@@ -1,13 +1,99 @@
 /* SUCCESS PAGE STYLES */
 .success-page {
-  background-color: #FAF7F2;
+  background-color: #CE2829;
   min-height: 100vh;
-  padding: 40px 20px;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.success-header {
+  padding: 60px 20px 20px 20px;
   text-align: center;
 }
 
-.success-page h1 {
-  color: #CE2829;
+.success-header .logo {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.brand-title {
   font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* Main Content */
+.success-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+}
+
+.success-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-title {
+  font-size: 6rem;
+  font-weight: 300;
   margin-bottom: 20px;
+  letter-spacing: 4px;
+  line-height: 1.1;
+}
+
+.success-subtitle {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+.order-info {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.order-info p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .success-title {
+    font-size: 3.5rem;
+  }
+  
+  .success-subtitle {
+    font-size: 2.2rem;
+  }
+  
+  .brand-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-title {
+    font-size: 2.8rem;
+  }
+  
+  .success-subtitle {
+    font-size: 1.8rem;
+  }
+  
+  .brand-title {
+    font-size: 1.8rem;
+  }
 }
