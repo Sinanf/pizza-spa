@@ -5,7 +5,7 @@ import '../pages/OrderPage.css';
 
 function OrderPage({ setOrderData }) {
   const history = useHistory();
-  
+
   // Form State
   const [formData, setFormData] = useState({
     isim: '',
@@ -15,14 +15,14 @@ function OrderPage({ setOrderData }) {
     ozelNotlar: '',
     adet: 1
   });
-  
+
   // Error State
   const [errors, setErrors] = useState({});
-  
+
   // Malzeme listesi (tasarımdan)
   const malzemeler = [
-    'Pepperoni', 'Domates', 'Biber', 'Sosis', 'Mısır', 'Sucuk', 
-    'Kanadali Jambon', 'Tavuk Izgara', 'Soğan', 'Ananas', 
+    'Pepperoni', 'Domates', 'Biber', 'Sosis', 'Mısır', 'Sucuk',
+    'Kanadali Jambon', 'Tavuk Izgara', 'Soğan', 'Ananas',
     'Jalapeno', 'Kabak', 'Sarımsak'
   ];
 
@@ -33,6 +33,17 @@ function OrderPage({ setOrderData }) {
       ...prev,
       [name]: value
     }));
+
+    // Radio button seçimi için class güncellemesi
+    if (name === 'boyut') {
+      // Tüm radio label'lardan selected class'ını kaldır
+      document.querySelectorAll('.radio-label').forEach(label => {
+        label.classList.remove('selected');
+      });
+      // Seçili olan radio'nun label'ına selected class'ını ekle
+      e.target.closest('.radio-label').classList.add('selected');
+    }
+
     validateField(name, value);
   };
 
@@ -42,7 +53,7 @@ function OrderPage({ setOrderData }) {
       const yeniMalzemeler = prev.malzemeler.includes(malzeme)
         ? prev.malzemeler.filter(m => m !== malzeme)
         : [...prev.malzemeler, malzeme];
-      
+
       if (yeniMalzemeler.length <= 10) {
         validateField('malzemeler', yeniMalzemeler);
         return { ...prev, malzemeler: yeniMalzemeler };
@@ -62,8 +73,8 @@ function OrderPage({ setOrderData }) {
   // Field validation
   const validateField = (name, value) => {
     const newErrors = { ...errors };
-    
-    switch(name) {
+
+    switch (name) {
       case 'isim':
         if (value.length < 3) {
           newErrors.isim = 'İsim en az 3 karakter olmalıdır';
@@ -88,17 +99,17 @@ function OrderPage({ setOrderData }) {
         }
         break;
     }
-    
+
     setErrors(newErrors);
   };
 
   // Form geçerliliği kontrolü
   const isFormValid = () => {
-    return formData.isim.length >= 3 && 
-           formData.boyut && 
-           formData.malzemeler.length >= 4 && 
-           formData.malzemeler.length <= 10 &&
-           Object.keys(errors).length === 0;
+    return formData.isim.length >= 3 &&
+      formData.boyut &&
+      formData.malzemeler.length >= 4 &&
+      formData.malzemeler.length <= 10 &&
+      Object.keys(errors).length === 0;
   };
 
   // Fiyat hesaplama
@@ -110,40 +121,40 @@ function OrderPage({ setOrderData }) {
 
   // Form submit
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (!isFormValid()) return;
-  
-  try {
-    const orderData = {
-      ...formData,
-      totalPrice: calculatePrice(),
-      timestamp: new Date().toISOString()
-    };
-    
-    // IT1 için mock response oluştur
-    const mockResponse = {
-      data: {
-        id: Math.floor(Math.random() * 1000),
-        createdAt: new Date().toISOString(),
-        ...orderData
-      }
-    };
-    
-    // Console'a yazdır (IT1 gereksinimi)
-    console.log('Sipariş Yanıtı:', mockResponse.data);
-    console.log('Form Verileri:', orderData);
-    
-    // State lifting ile veriyi üst componente gönder
-    setOrderData(mockResponse.data);
-    
-    // Başarı sayfasına yönlendir
-    history.push('/onay');
-    
-  } catch (error) {
-    console.error('Sipariş hatası:', error);
-  }
-};
+    e.preventDefault();
+
+    if (!isFormValid()) return;
+
+    try {
+      const orderData = {
+        ...formData,
+        totalPrice: calculatePrice(),
+        timestamp: new Date().toISOString()
+      };
+
+      // IT1 için mock response oluştur
+      const mockResponse = {
+        data: {
+          id: Math.floor(Math.random() * 1000),
+          createdAt: new Date().toISOString(),
+          ...orderData
+        }
+      };
+
+      // Console'a yazdır (IT1 gereksinimi)
+      console.log('Sipariş Yanıtı:', mockResponse.data);
+      console.log('Form Verileri:', orderData);
+
+      // State lifting ile veriyi üst componente gönder
+      setOrderData(mockResponse.data);
+
+      // Başarı sayfasına yönlendir
+      history.push('/onay');
+
+    } catch (error) {
+      console.error('Sipariş hatası:', error);
+    }
+  };
 
   return (
     <div className="order-page">
@@ -159,6 +170,13 @@ function OrderPage({ setOrderData }) {
       <main className="order-main">
         {/* Pizza Info */}
         <section className="pizza-info">
+          <section className="pizza-hero">
+            <img
+              src="/images/iteration-2-images/pictures/form-banner.png"
+              alt="Position Absolute Acı Pizza"
+              className="pizza-image"
+            />
+          </section>
           <h2>Position Absolute Acı Pizza</h2>
           <div className="pizza-details">
             <span className="price">85.50₺</span>
@@ -171,10 +189,10 @@ function OrderPage({ setOrderData }) {
             </div>
           </div>
           <p className="pizza-description">
-            Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. 
-            Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha 
-            sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, 
-            genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan 
+            Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
+            Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha
+            sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen,
+            genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan
             kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
           </p>
         </section>
@@ -186,7 +204,7 @@ function OrderPage({ setOrderData }) {
             <div className="form-group">
               <label>Boyut Seç *</label>
               <div className="radio-group">
-                {['Küçük', 'Orta', 'Büyük'].map(boyut => (
+                {['S', 'M', 'L'].map(boyut => (
                   <label key={boyut} className="radio-label">
                     <input
                       type="radio"
@@ -211,7 +229,7 @@ function OrderPage({ setOrderData }) {
                 name="hamur"
                 value={formData.hamur}
                 onChange={handleInputChange}
-                className="hamur-select"
+                className={`hamur-select ${formData.hamur ? 'selected' : ''}`}
               >
                 <option value="">Hamur Kalınlığı</option>
                 <option value="ince">İnce</option>
@@ -273,16 +291,16 @@ function OrderPage({ setOrderData }) {
           {/* Alt Kısım - Adet ve Toplam */}
           <div className="order-bottom">
             <div className="quantity-section">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="qty-btn"
                 onClick={() => handleAdetChange(-1)}
               >
                 -
               </button>
               <span className="quantity">{formData.adet}</span>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="qty-btn"
                 onClick={() => handleAdetChange(1)}
               >
@@ -304,8 +322,8 @@ function OrderPage({ setOrderData }) {
           </div>
 
           {/* Submit Button */}
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`submit-btn ${!isFormValid() ? 'disabled' : ''}`}
             disabled={!isFormValid()}
           >
@@ -313,6 +331,50 @@ function OrderPage({ setOrderData }) {
           </button>
         </form>
       </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-left">
+            <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" className="footer-logo" />
+            <div className="footer-info">
+              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
+            </div>
+          </div>
+
+          <div className="footer-center">
+            <h4>Sıcacık Menüler</h4>
+            <ul>
+              <li>Terminal Pizza</li>
+              <li>5 Kişilik Hackathlon Pizza</li>
+              <li>useEffect Tavuklu Pizza</li>
+              <li>Beyaz Console Frosty</li>
+              <li>Testler Geçti Mutlu Burger</li>
+              <li>Position Absolute Acı Burger</li>
+            </ul>
+          </div>
+
+          <div className="footer-right">
+            <h4>Instagram</h4>
+            <div className="instagram-grid">
+              <img src="/images/iteration-2-images/footer/insta/li-0.png" alt="Instagram 1" />
+              <img src="/images/iteration-2-images/footer/insta/li-1.png" alt="Instagram 2" />
+              <img src="/images/iteration-2-images/footer/insta/li-2.png" alt="Instagram 3" />
+              <img src="/images/iteration-2-images/footer/insta/li-3.png" alt="Instagram 4" />
+              <img src="/images/iteration-2-images/footer/insta/li-4.png" alt="Instagram 5" />
+              <img src="/images/iteration-2-images/footer/insta/li-5.png" alt="Instagram 6" />
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>© 2023 Teknolojik Yemekler.</p>
+        </div>
+      </footer>
+
+
     </div>
   );
 }
