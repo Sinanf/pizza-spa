@@ -10,20 +10,13 @@
 
 /* Header */
 .success-header {
-  padding: 60px 20px 20px 20px;
+  padding: 40px 20px 20px 20px;
   text-align: center;
 }
 
-.success-header .logo {
-  height: 60px;
-  margin-bottom: 15px;
-}
-
-.brand-title {
-  font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-  margin: 0;
+.logo {
+  height: 80px;
+  margin-bottom: 20px;
 }
 
 /* Main Content */
@@ -32,68 +25,206 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 0;
+  padding: 40px 20px;
 }
 
 .success-content {
   text-align: center;
-  padding: 40px 20px;
+  max-width: 600px;
+  width: 100%;
 }
 
-.success-title {
-  font-size: 6rem;
-  font-weight: 300;
-  margin-bottom: 20px;
-  letter-spacing: 4px;
-  line-height: 1.1;
-}
-
-.success-subtitle {
+/* Delivery Text - İnce ve uzun el yazısı */
+.delivery-text {
   font-size: 3rem;
+  font-style: italic;
+  color: #FDC913;
+  margin-bottom: 20px;
+  font-weight: 200; /* Daha ince */
+  font-family: 'Dancing Script', 'Brush Script MT', 'Lucida Handwriting', cursive;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  letter-spacing: 2px; /* Daha uzun */
+  transform: scaleX(1.2); /* Yatayda uzat */
+}
+
+/* Success Title */
+.success-title {
+  font-size: 4rem;
   font-weight: 300;
-  margin-bottom: 40px;
-  letter-spacing: 2px;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
   line-height: 1.1;
 }
 
-.order-info {
+/* Divider Line - Uzatılmış */
+.success-divider {
+  border: none;
+  height: 2px;
+  background-color: white;
+  width: 500px; /* 300px'den 500px'e uzatıldı */
+  margin: 30px auto;
+  max-width: 90%; /* Responsive için */
+}
+
+/* Pizza Name */
+.pizza-name {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: white;
+}
+
+/* Order Details - Ortalanmış */
+.order-details {
+  margin-bottom: 40px;
+  text-align: center; /* left'ten center'a değişti */
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.detail-line {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.6;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: white;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Malzemeler listesi için özel stil */
+.ingredients-list {
+  margin-top: 5px;
+  line-height: 1.8;
+}
+
+.ingredient-item {
+  display: inline;
+  font-weight: 400;
+}
+
+/* Order Summary Box */
+.order-summary-box {
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 0 auto;
+  max-width: 300px;
+  background-color: transparent;
+}
+
+.summary-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.summary-details {
+  text-align: left;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: white;
+}
+
+.total-line {
+  border-top: 1px solid white;
+  padding-top: 12px;
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* No Order Data */
+.no-order-data {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   margin-top: 30px;
 }
 
-.order-info p {
+.no-order-data p {
   font-size: 1.2rem;
-  margin-bottom: 10px;
-  font-weight: 300;
+  margin: 0;
+  color: white;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .success-title {
-    font-size: 3.5rem;
+  .logo {
+    height: 60px;
   }
   
-  .success-subtitle {
+  .success-title {
+    font-size: 3rem;
+    letter-spacing: 2px;
+  }
+  
+  .delivery-text {
     font-size: 2.2rem;
   }
   
-  .brand-title {
-    font-size: 2rem;
+  .pizza-name {
+    font-size: 1.5rem;
+  }
+  
+  .success-divider {
+    width: 350px;
+  }
+  
+  .order-details {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .detail-line {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .logo {
+    height: 50px;
+  }
+  
   .success-title {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
   
-  .success-subtitle {
+  .delivery-text {
     font-size: 1.8rem;
+    transform: scaleX(1.1); /* Mobilde daha az uzatma */
   }
   
-  .brand-title {
-    font-size: 1.8rem;
+  .pizza-name {
+    font-size: 1.3rem;
+  }
+  
+  .success-divider {
+    width: 280px;
+  }
+  
+  .order-summary-box {
+    max-width: 100%;
+    margin: 0 20px;
+  }
+  
+  .success-main {
+    padding: 20px 10px;
+  }
+  
+  .detail-line {
+    font-size: 0.9rem;
   }
 }
