@@ -18,6 +18,10 @@ function OrderPage({ setOrderData }) {
 
   // Error State
   const [errors, setErrors] = useState({});
+  
+  // Error handling states - YENİ EKLENEN
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   // Malzeme listesi (tasarımdan)
   const malzemeler = [
@@ -119,11 +123,14 @@ function OrderPage({ setOrderData }) {
     return (basePrice + extraIngredientPrice) * formData.adet;
   };
 
-  // Form submit
+  // Form submit - AXIOS REQRES.IN ENTEGRASYONu
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!isFormValid()) return;
+
+    setIsSubmitting(true);
+    setSubmitError(''); // Önceki hatayı temizle
 
     try {
       const orderData = {
@@ -132,29 +139,44 @@ function OrderPage({ setOrderData }) {
         timestamp: new Date().toISOString()
       };
 
-      // IT1 için mock response oluştur
-      const mockResponse = {
-        data: {
-          id: Math.floor(Math.random() * 1000),
-          createdAt: new Date().toISOString(),
-          ...orderData
+      // REQRES.IN API KEY İLE - DOĞRU HEADER FORMATINDA
+      const response = await axios.post('https://reqres.in/api/pizza', orderData, {
+        headers: {
+          'x-api-key': 'reqres-free-v1',
+          'Content-Type': 'application/json'
         }
-      };
-
+      });
+      
       // Console'a yazdır (IT1 gereksinimi)
-      console.log('Sipariş Yanıtı:', mockResponse.data);
+      console.log('Sipariş Yanıtı:', response.data);
       console.log('Form Verileri:', orderData);
 
-      // State lifting ile veriyi üst componente gönder
-      setOrderData(mockResponse.data);
+      // State lifting ile API response'unu üst componente gönder
+      setOrderData(response.data);
 
       // Başarı sayfasına yönlendir
       history.push('/onay');
 
     } catch (error) {
       console.error('Sipariş hatası:', error);
+      
+      // Gerçek API hatalarını yakala
+      if (error.response?.status === 401) {
+        setSubmitError('API anahtarı hatası. Lütfen tekrar deneyin.');
+      } else if (error.response?.status === 404) {
+        setSubmitError('API endpoint bulunamadı. Lütfen tekrar deneyin.');
+      } else if (!error.response) {
+        setSubmitError('İnternet bağlantınızı kontrol edin ve tekrar deneyin.');
+      } else if (error.response?.status >= 500) {
+        setSubmitError('Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.');
+      } else {
+        setSubmitError('Sipariş gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
 
   return (
     <div className="order-page">
@@ -199,6 +221,24 @@ function OrderPage({ setOrderData }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="pizza-form">
+          {/* Error Notification - YENİ EKLENEN */}
+          {submitError && (
+            <div className="error-notification">
+              <div className="error-content">
+                <span className="error-icon">⚠️</span>
+                <p className="error-message">{submitError}</p>
+                <button 
+                  type="button"
+                  onClick={() => setSubmitError('')} 
+                  className="close-error"
+                  aria-label="Hatayı kapat"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="form-row">
             {/* Boyut Seçimi */}
             <div className="form-group">
@@ -295,6 +335,7 @@ function OrderPage({ setOrderData }) {
                 type="button"
                 className="qty-btn"
                 onClick={() => handleAdetChange(-1)}
+                disabled={isSubmitting}
               >
                 -
               </button>
@@ -303,6 +344,7 @@ function OrderPage({ setOrderData }) {
                 type="button"
                 className="qty-btn"
                 onClick={() => handleAdetChange(1)}
+                disabled={isSubmitting}
               >
                 +
               </button>
@@ -321,13 +363,13 @@ function OrderPage({ setOrderData }) {
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit Button - GÜNCELLENDİ */}
           <button
             type="submit"
-            className={`submit-btn ${!isFormValid() ? 'disabled' : ''}`}
-            disabled={!isFormValid()}
+            className={`submit-btn ${!isFormValid() || isSubmitting ? 'disabled' : ''}`}
+            disabled={!isFormValid() || isSubmitting}
           >
-            SİPARİŞ VER
+            {isSubmitting ? 'GÖNDERİLİYOR...' : 'SİPARİŞ VER'}
           </button>
         </form>
       </main>
@@ -373,8 +415,6 @@ function OrderPage({ setOrderData }) {
           <p>© 2023 Teknolojik Yemekler.</p>
         </div>
       </footer>
-
-
     </div>
   );
 }
