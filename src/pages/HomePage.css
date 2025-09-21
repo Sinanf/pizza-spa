@@ -1,12 +1,13 @@
-/* HOMEPAGE STYLES */
+/* HOMEPAGE STYLES - Referans Tasarıma Tam Uygun */
 .homepage {
   background-color: #CE2829;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
   color: white;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .header {
@@ -17,27 +18,24 @@
   left: 0;
   right: 0;
   z-index: 20;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
-  height: 80px;
+  height: 60px;
   width: auto;
-}
-
-.brand-title {
-  font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 2px;
 }
 
 .hero {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-text {
@@ -50,9 +48,18 @@
   width: 100%;
 }
 
+.hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #FDC913;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
 .hero-title {
   font-size: 5rem;
-  font-weight: 250;
+  font-weight: 300;
   line-height: 1.1;
   margin-bottom: 40px;
   letter-spacing: 3px;
@@ -81,6 +88,7 @@
   justify-content: center;
   align-items: flex-end;
   overflow: hidden;
+  width: 100%;
 }
 
 .main-pizza {
@@ -92,6 +100,446 @@
   object-position: center top;
 }
 
+/* Menu Categories Section */
+.menu-categories {
+  background: white;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #FAF7F2;
+  min-width: 120px;
+}
+
+.category-item.active {
+  background: #292929;
+  color: white;
+}
+
+.category-item:hover:not(.active) {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.category-item img {
+  width: 40px;
+  height: 40px;
+}
+
+.category-item span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #292929;
+}
+
+.category-item.active span {
+  color: white;
+}
+
+/* CTA Cards Section */
+.cta-section {
+  background: #FAF7F2;
+  padding: 60px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cta-cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  height: 500px;
+}
+
+.cta-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cta-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sol büyük kart */
+.cta-card-large {
+  background-color: #CE2829;
+  color: white;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.cta-card-large .cta-content {
+  z-index: 3;
+  position: relative;
+  max-width: 100%;
+}
+
+.cta-card-large .cta-content h3 {
+  font-size: 2.8rem;
+  font-weight: 500; 
+  margin-bottom: 8px;
+  line-height: 1.1;
+  color: white;
+  letter-spacing: -1px;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: none;
+}
+
+.cta-card-large .cta-content p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  font-weight: 300;
+  color: white;
+}
+
+.cta-card-large img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+
+
+/* Sağ taraf kartları */
+.cta-cards-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Sağ üst kart (siyah) - Hackathlon Burger */
+.cta-card-dark {
+  background-color: #292929;
+  color: white;
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  align-items: center; /* Dikey ortalama */
+  justify-content: flex-start; /* Yatay başlangıç */
+}
+
+.cta-card-dark .cta-content {
+  z-index: 2;
+  position: relative;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* İçeriği dikey ortala */
+}
+
+.cta-card-dark .cta-content h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  color: white;
+}
+
+.cta-card-dark img {
+  position: absolute;
+  right: 20px;
+  top: 50%; 
+  transform: translateY(-50%); 
+  height: 70%;
+  width: auto;
+  z-index: 1;
+}
+
+/* Sağ alt kart (sarı) - npm gibi kurye */
+.cta-card-light {
+  background-color: #F8E8A6;
+  color: #292929;
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.cta-card-light .cta-content {
+  z-index: 2;
+  position: relative;
+  max-width: 60%;
+}
+
+.cta-card-light .cta-content h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  color: #292929;
+}
+
+.cta-card-light .cta-content h3 .highlight {
+  color: #CE2829;
+}
+
+
+.cta-card-light img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+
+/* Tüm butonlar aynı stil */
+.cta-btn {
+  background: white;
+  color:red;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Products Section */
+.products-section {
+  background: #FAF7F2;
+  padding: 60px 20px;
+  text-align: center;
+  color: #292929;
+}
+
+.products-subtitle {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #CE2829;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.products-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: #292929;
+}
+
+.products-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.product-category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: white;
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+.product-category.active {
+  background: #292929;
+  color: white;
+}
+
+.product-category:hover:not(.active) {
+  background: #f0f0f0;
+}
+
+.product-category img {
+  width: 35px;
+  height: 35px;
+}
+
+.product-category span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #292929;
+}
+
+.product-category.active span {
+  color: white;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 60%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+.product-card h4 {
+  font-size: 1.2rem;
+  margin: 15px 0 10px 0;
+  color: #292929;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px 15px 15px;
+}
+
+.rating {
+  font-weight: bold;
+  color: #292929;
+}
+
+.reviews {
+  color: #5F5F5F;
+  font-size: 0.9rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #292929;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.footer {
+  background: #292929;
+  color: white;
+  padding: 50px 20px 20px 20px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+}
+
+.footer-logo {
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.footer-info p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.footer-info img {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-center h4,
+.footer-right h4 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.footer-center ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-center li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.instagram-grid img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero-title {
@@ -99,40 +547,52 @@
     letter-spacing: 2px;
   }
   
-  .hero-text {
-    top: 35%;
-  }
-  
-  .pizza-section {
-    height: 65vh;
-  }
-  
   .main-pizza {
     min-width: 600px;
+  }
+  
+  .category-nav,
+  .products-nav {
+    gap: 15px;
+  }
+  
+  .category-item,
+  .product-category {
+    flex-direction: column;
+    gap: 8px;
+    min-width: 100px;
+  }
+  
+  .cta-cards {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2.8rem;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
   }
   
-  .order-btn {
-    padding: 15px 35px;
-    font-size: 1.1rem;
+  .hero-subtitle {
+    font-size: 1.4rem;
   }
   
-  .hero-text {
-    top: 30%;
+  .products-title {
+    font-size: 2rem;
   }
   
-  .pizza-section {
-    height: 60vh;
-  }
-  
-  .main-pizza {
-    min-width: 500px;
+  .cta-content h3 {
+    font-size: 1.3rem;
   }
 }
