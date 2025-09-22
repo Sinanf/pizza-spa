@@ -36,7 +36,7 @@ describe('Pizza Order App - IT1 Tests', () => {
     cy.get('input[name="isim"]').type('Test User')
     
     // Pizza boyutu seç
-    cy.get('input[type="radio"][value="Küçük"]').check()
+    cy.get('input[type="radio"][value="S"]').check()
     
     // Hamur seç
     cy.get('select[name="hamur"]').select('normal')
@@ -71,7 +71,7 @@ describe('Pizza Order App - IT1 Tests', () => {
     cy.get('input[name="isim"]').clear().type('Test User')
     
     // Boyut seç ama malzeme seçme
-    cy.get('input[type="radio"][value="Küçük"]').check()
+    cy.get('input[type="radio"][value="S"]').check()
     cy.get('.submit-btn').should('have.class', 'disabled')
     
     // Sadece 2 malzeme seç (minimum 4 gerekli)
