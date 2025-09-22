@@ -1,4 +1,4 @@
-/* HOMEPAGE STYLES */
+/* HOMEPAGE STYLES - Referans Tasarıma Tam Uygun */
 .homepage {
   background-color: #CE2829;
   min-height: 100vh;
@@ -261,6 +261,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center; 
+}
 
 .cta-card-dark .cta-content h3 {
   font-size: 1.8rem;
@@ -594,5 +595,4 @@
   .cta-content h3 {
     font-size: 1.3rem;
   }
-}
 }
