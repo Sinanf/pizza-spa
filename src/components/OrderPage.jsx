@@ -93,6 +93,13 @@ function OrderPage({ setOrderData }) {
           delete newErrors.boyut;
         }
         break;
+        case 'hamur':                   
+      if (!value) {
+        newErrors.hamur = 'Hamur kalınlığı seçiniz';
+      } else {
+        delete newErrors.hamur;
+      }
+      break;
       case 'malzemeler':
         if (value.length < 4) {
           newErrors.malzemeler = 'En az 4 malzeme seçiniz';
@@ -111,6 +118,7 @@ function OrderPage({ setOrderData }) {
   const isFormValid = () => {
     return formData.isim.length >= 3 &&
       formData.boyut &&
+      formData.hamur &&
       formData.malzemeler.length >= 4 &&
       formData.malzemeler.length <= 10 &&
       Object.keys(errors).length === 0;
