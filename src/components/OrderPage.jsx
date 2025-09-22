@@ -19,11 +19,11 @@ function OrderPage({ setOrderData }) {
   // Error State
   const [errors, setErrors] = useState({});
   
-  // Error handling states - YENİ EKLENEN
+  // Error handling states 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
-  // Malzeme listesi (tasarımdan)
+  // Malzeme listesi
   const malzemeler = [
     'Pepperoni', 'Domates', 'Biber', 'Sosis', 'Mısır', 'Sucuk',
     'Kanadali Jambon', 'Tavuk Izgara', 'Soğan', 'Ananas',
@@ -40,11 +40,11 @@ function OrderPage({ setOrderData }) {
 
     // Radio button seçimi için class güncellemesi
     if (name === 'boyut') {
-      // Tüm radio label'lardan selected class'ını kaldır
+      
       document.querySelectorAll('.radio-label').forEach(label => {
         label.classList.remove('selected');
       });
-      // Seçili olan radio'nun label'ına selected class'ını ekle
+      
       e.target.closest('.radio-label').classList.add('selected');
     }
 
@@ -130,7 +130,7 @@ function OrderPage({ setOrderData }) {
     if (!isFormValid()) return;
 
     setIsSubmitting(true);
-    setSubmitError(''); // Önceki hatayı temizle
+    setSubmitError(''); 
 
     try {
       const orderData = {
@@ -139,7 +139,7 @@ function OrderPage({ setOrderData }) {
         timestamp: new Date().toISOString()
       };
 
-      // REQRES.IN API KEY İLE - DOĞRU HEADER FORMATINDA
+      // REQRES.IN API KEY İLE 
       const response = await axios.post('https://reqres.in/api/pizza', orderData, {
         headers: {
           'x-api-key': 'reqres-free-v1',
