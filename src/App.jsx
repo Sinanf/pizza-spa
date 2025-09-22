@@ -7,7 +7,7 @@ import SuccessPage from './components/SuccessPage';
 import './App.css';
 
 function App() {
-  // IT2 için state lifting yapacağız
+  
   const [orderData, setOrderData] = useState(null);
 
   return (
