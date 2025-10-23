@@ -19,6 +19,13 @@
   margin-bottom: 20px;
 }
 
+/* Ensure centered logo after global img becomes block */
+.success-header .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Main Content */
 .success-main {
   flex: 1;

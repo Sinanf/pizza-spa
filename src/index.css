@@ -40,3 +40,10 @@ a {
 a:hover {
   color: #747bff;
 }
+
+/* Make media scale down within containers to prevent overflow */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

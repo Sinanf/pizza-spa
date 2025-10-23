@@ -23,6 +23,13 @@
   margin-bottom: 10px;
 }
 
+/* Ensure centered logo after global img becomes block */
+.order-header .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 .breadcrumb {
   font-size: 1.1rem;
@@ -451,5 +458,13 @@
   .order-bottom {
     flex-direction: column;
     gap: 20px;
+  }
+
+  /* Make summary responsive on small screens */
+  .order-summary {
+    min-width: 0;
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
   }
 }
