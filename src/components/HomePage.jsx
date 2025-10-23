@@ -13,7 +13,7 @@ function HomePage() {
     <div className="homepage">
       {/* Header */}
       <header className="header">
-        <img src="/images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
+        <img src="public\images\iteration-1-images\logo.svg" alt="Logo" className="logo" />
       </header>
 
       {/* Hero Section */}
@@ -31,7 +31,7 @@ function HomePage() {
         
         <div className="pizza-section">
           <img 
-            src="/images/iteration-1-images/home-banner.png" 
+            src="public\images\iteration-1-images\home-banner.png" 
             alt="Pizza" 
             className="main-pizza" 
           />
@@ -42,27 +42,27 @@ function HomePage() {
       <section className="menu-categories">
         <div className="category-nav">
           <div className="category-item active">
-            <img src="/images/iteration-2-images/icons/1.svg" alt="YENİ! Kore" />
+            <img src="public\images\iteration-2-images\icons\1.svg" alt="YENİ! Kore" />
             <span>YENİ! Kore</span>
           </div>
           <div className="category-item">
-            <img src="/images/iteration-2-images/icons/2.svg" alt="Pizza" />
+            <img src="public\images\iteration-2-images\icons\2.svg" alt="Pizza" />
             <span>Pizza</span>
           </div>
           <div className="category-item">
-            <img src="/images/iteration-2-images/icons/3.svg" alt="Burger" />
+            <img src="public\images\iteration-2-images\icons\3.svg" alt="Burger" />
             <span>Burger</span>
           </div>
           <div className="category-item">
-            <img src="/images/iteration-2-images/icons/4.svg" alt="Kızartmalar" />
+            <img src="public\images\iteration-2-images\icons\4.svg" alt="Kızartmalar" />
             <span>Kızartmalar</span>
           </div>
           <div className="category-item">
-            <img src="/images/iteration-2-images/icons/5.svg" alt="Fast food" />
+            <img src="public\images\iteration-2-images\icons\5.svg" alt="Fast food" />
             <span>Fast food</span>
           </div>
           <div className="category-item">
-            <img src="/images/iteration-2-images/icons/6.svg" alt="Gazlı İçecek" />
+            <img src="public\images\iteration-2-images\icons\6.svg" alt="Gazlı İçecek" />
             <span>Gazlı İçecek</span>
           </div>
         </div>
@@ -77,7 +77,7 @@ function HomePage() {
               <p>Position: Absolute Acı Burger</p>
               <button className="cta-btn">SİPARİŞ VER</button>
             </div>
-            <img src="/images/iteration-2-images/cta/kart-1.png" alt="Özel Burger" />
+            <img src="public\images\iteration-2-images\cta\kart-1.png" alt="Özel Burger" />
           </div>
           
           <div className="cta-cards-right">
@@ -86,7 +86,7 @@ function HomePage() {
                 <h3>Hackathlon <br /> Burger Menü</h3>
                 <button className="cta-btn">SİPARİŞ VER</button>
               </div>
-              <img src="/images/iteration-2-images/cta/kart-2.png" alt="Hackathlon Burger" />
+              <img src="public\images\iteration-2-images\cta\kart-2.png" alt="Hackathlon Burger" />
             </div>
             
             <div className="cta-card cta-card-light">
@@ -94,7 +94,7 @@ function HomePage() {
                 <h3>Çooooook hızlı <br/> npm gibi kurye</h3>
                 <button className="cta-btn">SİPARİŞ VER</button>
               </div>
-              <img src="/images/iteration-2-images/cta/kart-3.png" alt="Hızlı Kurye" />
+              <img src="public\images\iteration-2-images\cta\kart-3.png" alt="Hızlı Kurye" />
             </div>
           </div>
         </div>
@@ -107,34 +107,34 @@ function HomePage() {
         
         <div className="products-nav">
           <div className="product-category active">
-            <img src="/images/iteration-2-images/icons/1.svg" alt="Ramen" />
+            <img src="public\images\iteration-2-images\icons\1.svg" alt="Ramen" />
             <span>Ramen</span>
           </div>
           <div className="product-category">
-            <img src="/images/iteration-2-images/icons/2.svg" alt="Pizza" />
+            <img src="public\images\iteration-2-images\icons\2.svg" alt="Pizza" />
             <span>Pizza</span>
           </div>
           <div className="product-category">
-            <img src="/images/iteration-2-images/icons/3.svg" alt="Burger" />
+            <img src="public\images\iteration-2-images\icons\3.svg" alt="Burger" />
             <span>Burger</span>
           </div>
           <div className="product-category">
-            <img src="/images/iteration-2-images/icons/4.svg" alt="French fries" />
+            <img src="public\images\iteration-2-images\icons\4.svg" alt="French fries" />
             <span>French fries</span>
           </div>
           <div className="product-category">
-            <img src="/images/iteration-2-images/icons/5.svg" alt="Fast food" />
+            <img src="public\images\iteration-2-images\icons\5.svg" alt="Fast food" />
             <span>Fast food</span>
           </div>
           <div className="product-category">
-            <img src="/images/iteration-2-images/icons/6.svg" alt="Soft drinks" />
+            <img src="public\images\iteration-2-images\icons\6.svg" alt="Soft drinks" />
             <span>Soft drinks</span>
           </div>
         </div>
 
         <div className="products-grid">
           <div className="product-card">
-            <img src="/images/iteration-2-images/pictures/food-1.png" alt="Terminal Pizza" />
+            <img src="public\images\iteration-2-images\pictures\food-1.png" alt="Terminal Pizza" />
             <h4>Terminal Pizza</h4>
             <div className="product-info">
               <span className="rating">4.9</span>
@@ -143,7 +143,7 @@ function HomePage() {
             </div>
           </div>
           <div className="product-card">
-            <img src="/images/iteration-2-images/pictures/food-2.png" alt="Position Absolute Acı Pizza" />
+            <img src="public\images\iteration-2-images\pictures\food-2.png" alt="Position Absolute Acı Pizza" />
             <h4>Position Absolute Acı Pizza</h4>
             <div className="product-info">
               <span className="rating">4.9</span>
@@ -152,7 +152,7 @@ function HomePage() {
             </div>
           </div>
           <div className="product-card">
-            <img src="/images/iteration-2-images/pictures/food-3.png" alt="useEffect Tavuklu Burger" />
+            <img src="public\images\iteration-2-images\pictures\food-3.png" alt="useEffect Tavuklu Burger" />
             <h4>useEffect Tavuklu Burger</h4>
             <div className="product-info">
               <span className="rating">4.9</span>
@@ -167,11 +167,11 @@ function HomePage() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-left">
-            <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" className="footer-logo" />
+            <img src="public\images\iteration-2-images\footer\logo-footer.svg" alt="Logo" className="footer-logo" />
             <div className="footer-info">
-              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
-              <p><img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
-              <p><img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
+              <p><img src="public\images\iteration-2-images\footer\icons\icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
+              <p><img src="public\images\iteration-2-images\footer\icons\icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
+              <p><img src="public\images\iteration-2-images\footer\icons\icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
             </div>
           </div>
           
@@ -190,12 +190,12 @@ function HomePage() {
           <div className="footer-right">
             <h4>Instagram</h4>
             <div className="instagram-grid">
-              <img src="/images/iteration-2-images/footer/insta/li-0.png" alt="Instagram 1" />
-              <img src="/images/iteration-2-images/footer/insta/li-1.png" alt="Instagram 2" />
-              <img src="/images/iteration-2-images/footer/insta/li-2.png" alt="Instagram 3" />
-              <img src="/images/iteration-2-images/footer/insta/li-3.png" alt="Instagram 4" />
-              <img src="/images/iteration-2-images/footer/insta/li-4.png" alt="Instagram 5" />
-              <img src="/images/iteration-2-images/footer/insta/li-5.png" alt="Instagram 6" />
+              <img src="public\images\iteration-2-images\footer\insta\li-0.png" alt="Instagram 1" />
+              <img src="public\images\iteration-2-images\footer\insta\li-1.png" alt="Instagram 2" />
+              <img src="public\images\iteration-2-images\footer\insta\li-2.png" alt="Instagram 3" />
+              <img src="public\images\iteration-2-images\footer\insta\li-3.png" alt="Instagram 4" />
+              <img src="public\images\iteration-2-images\footer\insta\li-4.png" alt="Instagram 5" />
+              <img src="public\images\iteration-2-images\footer\insta\li-5.png" alt="Instagram 6" />
             </div>
           </div>
         </div>

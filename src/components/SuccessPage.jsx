@@ -20,7 +20,7 @@ function SuccessPage({ orderData }) {
     <div className="success-page">
       {/* Header */}
       <header className="success-header">
-        <img src="/images/iteration-1-images/logo.svg" alt="Teknolojik Yemekler" className="logo" />
+        <img src="public\images\iteration-1-images\logo.svg" alt="Teknolojik Yemekler" className="logo" />
       </header>
 
       {/* Success Content */}
