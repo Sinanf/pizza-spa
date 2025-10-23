@@ -1,9 +1,9 @@
 // src/App.jsx
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import OrderPage from './components/OrderPage';
-import SuccessPage from './components/SuccessPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import OrderPage from './pages/OrderPage';
+import SuccessPage from './pages/SuccessPage';
 import './App.css';
 
 function App() {
@@ -11,17 +11,13 @@ function App() {
   const [orderData, setOrderData] = useState(null);
 
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="App">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/siparis" 
-            render={() => <OrderPage setOrderData={setOrderData} />} 
-          />
-          <Route path="/onay" 
-            render={() => <SuccessPage orderData={orderData} />} 
-          />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/siparis" element={<OrderPage setOrderData={setOrderData} />} />
+          <Route path="/onay" element={<SuccessPage orderData={orderData} />} />
+        </Routes>
       </div>
     </Router>
   );

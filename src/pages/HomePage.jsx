@@ -1,19 +1,20 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import '../pages/HomePage.css';
+import { useNavigate } from 'react-router-dom';
+import './HomePage.css';
+import { asset } from '../utils/asset';
 
 function HomePage() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goToOrder = () => {
-    history.push('/siparis');
+    navigate('/siparis');
   };
 
   return (
     <div className="homepage">
       {/* Header */}
       <header className="header">
-        <img src="/images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
+        <img src={asset('images/iteration-1-images/logo.svg')} alt="Logo" className="logo" />
       </header>
 
       {/* Hero Section */}
@@ -31,7 +32,7 @@ function HomePage() {
         
         <div className="pizza-section">
           <img 
-            src="/images/iteration-1-images/home-banner.png" 
+            src={asset('images/iteration-1-images/home-banner.png')} 
             alt="Pizza" 
             className="main-pizza" 
           />
