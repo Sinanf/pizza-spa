@@ -25,16 +25,14 @@ function HomePage() {
             KOD ACIKTIRIR<br />
             PİZZA, DOYURUR
           </h2>
-          <button onClick={goToOrder} className="order-btn">
-            ACIKTIM
-          </button>
+          <button onClick={goToOrder} className="order-btn">ACIKTIM</button>
         </div>
-        
+
         <div className="pizza-section">
-          <img 
-            src={asset('images/iteration-1-images/home-banner.png')} 
-            alt="Pizza" 
-            className="main-pizza" 
+          <img
+            src={asset('images/iteration-1-images/home-banner.png')}
+            alt="Pizza"
+            className="main-pizza"
           />
         </div>
       </main>
@@ -75,12 +73,12 @@ function HomePage() {
           <div className="cta-card cta-card-large">
             <div className="cta-content">
               <h3>Özel <br />Lezzetus</h3>
-              <p>Position: Absolute Acı Burger</p>
+              <p>Position: Absolute Aç Burger</p>
               <button className="cta-btn">SİPARİŞ VER</button>
             </div>
             <img src="/images/iteration-2-images/cta/kart-1.png" alt="Özel Burger" />
           </div>
-          
+
           <div className="cta-cards-right">
             <div className="cta-card cta-card-dark">
               <div className="cta-content">
@@ -89,10 +87,10 @@ function HomePage() {
               </div>
               <img src="/images/iteration-2-images/cta/kart-2.png" alt="Hackathlon Burger" />
             </div>
-            
+
             <div className="cta-card cta-card-light">
               <div className="cta-content">
-                <h3>Çooooook hızlı <br/> npm gibi kurye</h3>
+                <h3>Aşırı hızlı <br/> npm gibi kurye</h3>
                 <button className="cta-btn">SİPARİŞ VER</button>
               </div>
               <img src="/images/iteration-2-images/cta/kart-3.png" alt="Hızlı Kurye" />
@@ -105,7 +103,7 @@ function HomePage() {
       <section className="products-section">
         <p className="products-subtitle">en çok paketlenen menüler</p>
         <h2 className="products-title">Acıktıran Kodlara Doyuran Lezzetler</h2>
-        
+
         <div className="products-nav">
           <div className="product-category active">
             <img src="/images/iteration-2-images/icons/1.svg" alt="Ramen" />
@@ -140,16 +138,16 @@ function HomePage() {
             <div className="product-info">
               <span className="rating">4.9</span>
               <span className="reviews">(200)</span>
-              <span className="price">60₺</span>
+              <span className="price">₺60</span>
             </div>
           </div>
           <div className="product-card">
-            <img src="/images/iteration-2-images/pictures/food-2.png" alt="Position Absolute Acı Pizza" />
-            <h4>Position Absolute Acı Pizza</h4>
+            <img src="/images/iteration-2-images/pictures/food-2.png" alt="Position Absolute Aç Pizza" />
+            <h4>Position Absolute Aç Pizza</h4>
             <div className="product-info">
               <span className="rating">4.9</span>
               <span className="reviews">(928)</span>
-              <span className="price">85₺</span>
+              <span className="price">₺85</span>
             </div>
           </div>
           <div className="product-card">
@@ -158,7 +156,7 @@ function HomePage() {
             <div className="product-info">
               <span className="rating">4.9</span>
               <span className="reviews">(462)</span>
-              <span className="price">75₺</span>
+              <span className="price">₺75</span>
             </div>
           </div>
         </div>
@@ -170,12 +168,12 @@ function HomePage() {
           <div className="footer-left">
             <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" className="footer-logo" />
             <div className="footer-info">
-              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, İstanbul Türkiye</p>
               <p><img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
               <p><img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
             </div>
           </div>
-          
+
           <div className="footer-center">
             <h4>Sıcacık Menüler</h4>
             <ul>
@@ -184,10 +182,10 @@ function HomePage() {
               <li>useEffect Tavuklu Pizza</li>
               <li>Beyaz Console Frosty</li>
               <li>Testler Geçti Mutlu Burger</li>
-              <li>Position Absolute Acı Burger</li>
+              <li>Position Absolute Aç Burger</li>
             </ul>
           </div>
-          
+
           <div className="footer-right">
             <h4>Instagram</h4>
             <div className="instagram-grid">
@@ -200,7 +198,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <p>© 2023 Teknolojik Yemekler.</p>
         </div>
@@ -210,3 +208,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

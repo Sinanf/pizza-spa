@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './OrderPage.css';
@@ -14,39 +14,36 @@ function OrderPage({ setOrderData }) {
     hamur: '',
     malzemeler: [],
     ozelNotlar: '',
-    adet: 1
+    adet: 1,
   });
 
   // Error State
   const [errors, setErrors] = useState({});
-  
-  // Error handling states 
+
+  // Error handling states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
   // Malzeme listesi
   const malzemeler = [
-    'Pepperoni', 'Domates', 'Biber', 'Sosis', 'MÄ±sÄ±r', 'Sucuk',
-    'Kanadali Jambon', 'Tavuk Izgara', 'SoÄŸan', 'Ananas',
-    'Jalapeno', 'Kabak', 'SarÄ±msak'
+    'Pepperoni', 'Domates', 'Biber', 'Sosis', 'Mısır', 'Sucuk',
+    'Kanadalı Jambon', 'Tavuk Izgara', 'Soğan', 'Ananas',
+    'Jalapeno', 'Kabak', 'Sarımsak',
   ];
 
-  // Input deÄŸiÅŸiklik handler
+  // Input değişiklik handler
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
-    // Radio button seÃ§imi iÃ§in class gÃ¼ncellemesi
     if (name === 'boyut') {
-      
-      document.querySelectorAll('.radio-label').forEach(label => {
+      document.querySelectorAll('.radio-label').forEach((label) => {
         label.classList.remove('selected');
       });
-      
-      e.target.closest('.radio-label').classList.add('selected');
+      e.target.closest('.radio-label')?.classList.add('selected');
     }
 
     validateField(name, value);
@@ -54,9 +51,9 @@ function OrderPage({ setOrderData }) {
 
   // Malzeme checkbox handler
   const handleMalzemeChange = (malzeme) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const yeniMalzemeler = prev.malzemeler.includes(malzeme)
-        ? prev.malzemeler.filter(m => m !== malzeme)
+        ? prev.malzemeler.filter((m) => m !== malzeme)
         : [...prev.malzemeler, malzeme];
 
       if (yeniMalzemeler.length <= 10) {
@@ -67,11 +64,11 @@ function OrderPage({ setOrderData }) {
     });
   };
 
-  // Adet deÄŸiÅŸtirme
+  // Adet değiştirme
   const handleAdetChange = (delta) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      adet: Math.max(1, prev.adet + delta)
+      adet: Math.max(1, prev.adet + delta),
     }));
   };
 
@@ -82,119 +79,111 @@ function OrderPage({ setOrderData }) {
     switch (name) {
       case 'isim':
         if (value.length < 3) {
-          newErrors.isim = 'Ä°sim en az 3 karakter olmalÄ±dÄ±r';
+          newErrors.isim = 'İsim en az 3 karakter olmalıdır';
         } else {
           delete newErrors.isim;
         }
         break;
       case 'boyut':
         if (!value) {
-          newErrors.boyut = 'Pizza boyutu seÃ§iniz';
+          newErrors.boyut = 'Pizza boyutu seçiniz';
         } else {
           delete newErrors.boyut;
         }
         break;
-        case 'hamur':                   
-      if (!value) {
-        newErrors.hamur = 'Hamur kalÄ±nlÄ±ÄŸÄ± seÃ§iniz';
-      } else {
-        delete newErrors.hamur;
-      }
-      break;
+      case 'hamur':
+        if (!value) {
+          newErrors.hamur = 'Hamur kalınlığını seçiniz';
+        } else {
+          delete newErrors.hamur;
+        }
+        break;
       case 'malzemeler':
         if (value.length < 4) {
-          newErrors.malzemeler = 'En az 4 malzeme seÃ§iniz';
+          newErrors.malzemeler = 'En az 4 malzeme seçiniz';
         } else if (value.length > 10) {
-          newErrors.malzemeler = 'En fazla 10 malzeme seÃ§ebilirsiniz';
+          newErrors.malzemeler = 'En fazla 10 malzeme seçebilirsiniz';
         } else {
           delete newErrors.malzemeler;
         }
+        break;
+      default:
         break;
     }
 
     setErrors(newErrors);
   };
 
-  // Form geÃ§erliliÄŸi kontrolÃ¼
+  // Form geçerlilik kontrolü
   const isFormValid = () => {
-    return formData.isim.length >= 3 &&
+    return (
+      formData.isim.length >= 3 &&
       formData.boyut &&
       formData.hamur &&
       formData.malzemeler.length >= 4 &&
       formData.malzemeler.length <= 10 &&
-      Object.keys(errors).length === 0;
+      Object.keys(errors).length === 0
+    );
   };
 
   // Fiyat hesaplama
   const calculatePrice = () => {
-    const basePrice = 85.50;
+    const basePrice = 85.5;
     const extraIngredientPrice = formData.malzemeler.length * 5;
     return (basePrice + extraIngredientPrice) * formData.adet;
   };
 
-  // Form submit - AXIOS REQRES.IN ENTEGRASYONu
+  // Form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!isFormValid()) return;
 
     setIsSubmitting(true);
-    setSubmitError(''); 
+    setSubmitError('');
 
     try {
       const orderData = {
         ...formData,
         totalPrice: calculatePrice(),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
-      // REQRES.IN API KEY Ä°LE 
       const response = await axios.post('https://reqres.in/api/pizza', orderData, {
         headers: {
           'x-api-key': 'reqres-free-v1',
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
-      
-      // Console'a yazdÄ±r (IT1 gereksinimi)
-      console.log('SipariÅŸ YanÄ±tÄ±:', response.data);
+
+      console.log('Sipariş Yanıtı:', response.data);
       console.log('Form Verileri:', orderData);
 
-      // State lifting ile API response'unu Ã¼st componente gÃ¶nder
       setOrderData(response.data);
-
-      // BaÅŸarÄ± sayfasÄ±na yÃ¶nlendir
       navigate('/onay');
-
     } catch (error) {
-      console.error('SipariÅŸ hatasÄ±:', error);
-      
-      // GerÃ§ek API hatalarÄ±nÄ± yakala
+      console.error('Sipariş hatası:', error);
       if (error.response?.status === 401) {
-        setSubmitError('API anahtarÄ± hatasÄ±. LÃ¼tfen tekrar deneyin.');
+        setSubmitError('API anahtarı hatası. Lütfen tekrar deneyin.');
       } else if (error.response?.status === 404) {
-        setSubmitError('API endpoint bulunamadÄ±. LÃ¼tfen tekrar deneyin.');
+        setSubmitError('API endpoint bulunamadı. Lütfen tekrar deneyin.');
       } else if (!error.response) {
-        setSubmitError('Ä°nternet baÄŸlantÄ±nÄ±zÄ± kontrol edin ve tekrar deneyin.');
+        setSubmitError('İnternet bağlantınızı kontrol edin ve tekrar deneyin.');
       } else if (error.response?.status >= 500) {
-        setSubmitError('Sunucu hatasÄ± oluÅŸtu. LÃ¼tfen daha sonra tekrar deneyin.');
+        setSubmitError('Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.');
       } else {
-        setSubmitError('SipariÅŸ gÃ¶nderilirken bir hata oluÅŸtu. LÃ¼tfen tekrar deneyin.');
+        setSubmitError('Sipariş gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
       }
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
   return (
     <div className="order-page">
       {/* Header */}
       <header className="order-header">
         <img src={asset('images/iteration-1-images/logo.svg')} alt="Logo" className="logo" />
-        <nav className="breadcrumb">
-          Anasayfa - SeÃ§enekler - <strong>SipariÅŸ OluÅŸtur</strong>
-        </nav>
+        <nav className="breadcrumb">Anasayfa - Seçenekler - <strong>Sipariş Oluştur</strong></nav>
       </header>
 
       {/* Main Content */}
@@ -204,56 +193,54 @@ function OrderPage({ setOrderData }) {
           <section className="pizza-hero">
             <img
               src={asset('images/iteration-2-images/pictures/form-banner.png')}
-              alt="Position Absolute AcÄ± Pizza"
+              alt="Position Absolute Aç Pizza"
               className="pizza-image"
             />
           </section>
-          <h2>Position Absolute AcÄ± Pizza</h2>
+          <h2>Position Absolute Aç Pizza</h2>
           <div className="pizza-details">
-            <span className="price">85.50â‚º</span>
+            <span className="price">₺85,50</span>
             <div className="rating">
-              <div className="stars">
-                â˜…â˜…â˜…â˜…â˜…
-              </div>
+              <div className="stars">★★★★★</div>
               <span>4.9</span>
               <span>(200)</span>
             </div>
           </div>
           <p className="pizza-description">
-            Frontend Dev olarak hala position:absolute kullanÄ±yorsan bu Ã§ok acÄ± pizza tam sana gÃ¶re.
-            Pizza, domates, peynir ve genellikle Ã§eÅŸitli diÄŸer malzemelerle kaplanmÄ±ÅŸ, daha
-            sonra geleneksel olarak odun ateÅŸinde bir fÄ±rÄ±nda yÃ¼ksek sÄ±caklÄ±kta piÅŸirilen,
-            genellikle yuvarlak, dÃ¼zleÅŸtirilmiÅŸ mayalÄ± buÄŸday bazlÄ± hamurdan oluÅŸan Ä°talyan
-            kÃ¶kenli lezzetli bir yemektir. KÃ¼Ã§Ã¼k bir pizzaya bazen pizzetta denir.
+            Frontend Dev olarak hâlâ position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
+            Pizza; domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel
+            olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş
+            mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen
+            pizzetta denir.
           </p>
         </section>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="pizza-form">
-          {/* Error Notification - YENÄ° EKLENEN */}
+          {/* Error Notification */}
           {submitError && (
             <div className="error-notification">
               <div className="error-content">
-                <span className="error-icon">âš ï¸</span>
+                <span className="error-icon">!</span>
                 <p className="error-message">{submitError}</p>
-                <button 
+                <button
                   type="button"
-                  onClick={() => setSubmitError('')} 
+                  onClick={() => setSubmitError('')}
                   className="close-error"
-                  aria-label="HatayÄ± kapat"
+                  aria-label="Hatayı kapat"
                 >
-                  Ã—
+                  ×
                 </button>
               </div>
             </div>
           )}
 
           <div className="form-row">
-            {/* Boyut SeÃ§imi */}
+            {/* Boyut Seçimi */}
             <div className="form-group">
-              <label>Boyut SeÃ§ *</label>
+              <label>Boyut Seç *</label>
               <div className="radio-group">
-                {['S', 'M', 'L'].map(boyut => (
+                {['S', 'M', 'L'].map((boyut) => (
                   <label key={boyut} className="radio-label">
                     <input
                       type="radio"
@@ -270,9 +257,9 @@ function OrderPage({ setOrderData }) {
               {errors.boyut && <span className="error">{errors.boyut}</span>}
             </div>
 
-            {/* Hamur SeÃ§imi */}
+            {/* Hamur Seçimi */}
             <div className="form-group">
-              <label htmlFor="hamur">Hamur SeÃ§ *</label>
+              <label htmlFor="hamur">Hamur Seç *</label>
               <select
                 id="hamur"
                 name="hamur"
@@ -280,20 +267,21 @@ function OrderPage({ setOrderData }) {
                 onChange={handleInputChange}
                 className={`hamur-select ${formData.hamur ? 'selected' : ''}`}
               >
-                <option value="">Hamur KalÄ±nlÄ±ÄŸÄ±</option>
-                <option value="ince">Ä°nce</option>
+                <option value="">Hamur Kalınlığı</option>
+                <option value="ince">İnce</option>
                 <option value="normal">Normal</option>
-                <option value="kalin">KalÄ±n</option>
+                <option value="kalin">Kalın</option>
               </select>
+              {errors.hamur && <span className="error">{errors.hamur}</span>}
             </div>
           </div>
 
           {/* Malzemeler */}
           <div className="form-group">
             <label>Ek Malzemeler</label>
-            <p className="malzeme-info">En fazla 10 malzeme seÃ§ebilirsiniz. 5â‚º</p>
+            <p className="malzeme-info">En fazla 10 malzeme seçebilirsiniz. ₺5</p>
             <div className="checkbox-grid">
-              {malzemeler.map(malzeme => (
+              {malzemeler.map((malzeme) => (
                 <label key={malzeme} className="checkbox-label">
                   <input
                     type="checkbox"
@@ -308,16 +296,16 @@ function OrderPage({ setOrderData }) {
             {errors.malzemeler && <span className="error">{errors.malzemeler}</span>}
           </div>
 
-          {/* Ä°sim */}
+          {/* İsim */}
           <div className="form-group">
-            <label htmlFor="isim">Ä°sim Soyisim</label>
+            <label htmlFor="isim">İsim Soyisim</label>
             <input
               type="text"
               id="isim"
               name="isim"
               value={formData.isim}
               onChange={handleInputChange}
-              placeholder="Ä°sminizi giriniz"
+              placeholder="İsminizi giriniz"
               className="name-input"
             />
             {errors.isim && <span className="error">{errors.isim}</span>}
@@ -325,60 +313,50 @@ function OrderPage({ setOrderData }) {
 
           {/* Notlar */}
           <div className="form-group">
-            <label htmlFor="ozelNotlar">SipariÅŸ Notu</label>
+            <label htmlFor="ozelNotlar">Sipariş Notu</label>
             <textarea
               id="ozelNotlar"
               name="ozelNotlar"
               value={formData.ozelNotlar}
               onChange={handleInputChange}
-              placeholder="SipariÅŸinize eklemek istediÄŸiniz bir not var mÄ±?"
+              placeholder="Siparişinize eklemek istediğiniz bir not var mı?"
               className="order-note"
               rows="3"
             />
           </div>
 
-          {/* Alt KÄ±sÄ±m - Adet ve Toplam */}
+          {/* Alt Kısım - Adet ve Toplam */}
           <div className="order-bottom">
             <div className="quantity-section">
-              <button
-                type="button"
-                className="qty-btn"
-                onClick={() => handleAdetChange(-1)}
-                disabled={isSubmitting}
-              >
+              <button type="button" className="qty-btn" onClick={() => handleAdetChange(-1)} disabled={isSubmitting}>
                 -
               </button>
               <span className="quantity">{formData.adet}</span>
-              <button
-                type="button"
-                className="qty-btn"
-                onClick={() => handleAdetChange(1)}
-                disabled={isSubmitting}
-              >
+              <button type="button" className="qty-btn" onClick={() => handleAdetChange(1)} disabled={isSubmitting}>
                 +
               </button>
             </div>
 
             <div className="order-summary">
-              <h3>SipariÅŸ ToplamÄ±</h3>
+              <h3>Sipariş Toplamı</h3>
               <div className="summary-line">
-                <span>SeÃ§imler</span>
-                <span>{(formData.malzemeler.length * 5).toFixed(2)}â‚º</span>
+                <span>Seçimler</span>
+                <span>₺{(formData.malzemeler.length * 5).toFixed(2)}</span>
               </div>
               <div className="summary-line total">
                 <span>Toplam</span>
-                <span>{calculatePrice().toFixed(2)}â‚º</span>
+                <span>₺{calculatePrice().toFixed(2)}</span>
               </div>
             </div>
           </div>
 
-          {/* Submit Button - GÃœNCELLENDÄ° */}
+          {/* Submit Button */}
           <button
             type="submit"
             className={`submit-btn ${!isFormValid() || isSubmitting ? 'disabled' : ''}`}
             disabled={!isFormValid() || isSubmitting}
           >
-            {isSubmitting ? 'GÃ–NDERÄ°LÄ°YOR...' : 'SÄ°PARÄ°Åž VER'}
+            {isSubmitting ? 'GÖNDERİLİYOR...' : 'SİPARİŞ VER'}
           </button>
         </form>
       </main>
@@ -389,21 +367,21 @@ function OrderPage({ setOrderData }) {
           <div className="footer-left">
             <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" className="footer-logo" />
             <div className="footer-info">
-              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul TÃ¼rkiye</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, İstanbul Türkiye</p>
               <p><img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
               <p><img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
             </div>
           </div>
 
           <div className="footer-center">
-            <h4>SÄ±cacÄ±k MenÃ¼ler</h4>
+            <h4>Sıcacık Menüler</h4>
             <ul>
               <li>Terminal Pizza</li>
-              <li>5 KiÅŸilik Hackathlon Pizza</li>
+              <li>5 Kişilik Hackathlon Pizza</li>
               <li>useEffect Tavuklu Pizza</li>
               <li>Beyaz Console Frosty</li>
-              <li>Testler GeÃ§ti Mutlu Burger</li>
-              <li>Position Absolute AcÄ± Burger</li>
+              <li>Testler Geçti Mutlu Burger</li>
+              <li>Position Absolute Aç Burger</li>
             </ul>
           </div>
 
@@ -421,7 +399,7 @@ function OrderPage({ setOrderData }) {
         </div>
 
         <div className="footer-bottom">
-          <p>Â© 2023 Teknolojik Yemekler.</p>
+          <p>© 2023 Teknolojik Yemekler.</p>
         </div>
       </footer>
     </div>
@@ -429,3 +407,4 @@ function OrderPage({ setOrderData }) {
 }
 
 export default OrderPage;
+
