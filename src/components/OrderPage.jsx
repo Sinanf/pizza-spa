@@ -190,7 +190,7 @@ function OrderPage({ setOrderData }) {
     <div className="order-page">
       {/* Header */}
       <header className="order-header">
-        <img src="\images\iteration-1-images\logo.svg" alt="Logo" className="logo" />
+        <img src="/images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
         <nav className="breadcrumb">
           Anasayfa - Seçenekler - <strong>Sipariş Oluştur</strong>
         </nav>
@@ -202,7 +202,7 @@ function OrderPage({ setOrderData }) {
         <section className="pizza-info">
           <section className="pizza-hero">
             <img
-              src="\images\iteration-2-images\pictures\form-banner.png"
+              src="/images/iteration-2-images/pictures/form-banner.png"
               alt="Position Absolute Acı Pizza"
               className="pizza-image"
             />
@@ -386,11 +386,11 @@ function OrderPage({ setOrderData }) {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-left">
-            <img src="\images\iteration-2-images\footer\logo-footer.svg" alt="Logo" className="footer-logo" />
+            <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" className="footer-logo" />
             <div className="footer-info">
-              <p><img src="\images\iteration-2-images\footer\icons\icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
-              <p><img src="\images\iteration-2-images\footer\icons\icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
-              <p><img src="\images\iteration-2-images\footer\icons\icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Address" /> 341 Londonderry Road, Istanbul Türkiye</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Email" /> aciktim@teknolojikyemekler.com</p>
+              <p><img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Phone" /> +90 216 123 45 67</p>
             </div>
           </div>
 
@@ -409,12 +409,12 @@ function OrderPage({ setOrderData }) {
           <div className="footer-right">
             <h4>Instagram</h4>
             <div className="instagram-grid">
-              <img src="\images\iteration-2-images\footer\insta\li-0.png" alt="Instagram 1" />
-              <img src="\images\iteration-2-images\footer\insta\li-1.png" alt="Instagram 2" />
-              <img src="\images\iteration-2-images\footer\insta\li-2.png" alt="Instagram 3" />
-              <img src="\images\iteration-2-images\footer\insta\li-3.png" alt="Instagram 4" />
-              <img src="\images\iteration-2-images\footer\insta\li-4.png" alt="Instagram 5" />
-              <img src="\images\iteration-2-images\footer\insta\li-5.png" alt="Instagram 6" />
+              <img src="/images/iteration-2-images/footer/insta/li-0.png" alt="Instagram 1" />
+              <img src="/images/iteration-2-images/footer/insta/li-1.png" alt="Instagram 2" />
+              <img src="/images/iteration-2-images/footer/insta/li-2.png" alt="Instagram 3" />
+              <img src="/images/iteration-2-images/footer/insta/li-3.png" alt="Instagram 4" />
+              <img src="/images/iteration-2-images/footer/insta/li-4.png" alt="Instagram 5" />
+              <img src="/images/iteration-2-images/footer/insta/li-5.png" alt="Instagram 6" />
             </div>
           </div>
         </div>
